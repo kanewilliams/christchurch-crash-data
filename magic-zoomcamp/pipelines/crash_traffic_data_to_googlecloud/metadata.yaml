@@ -4,6 +4,7 @@ blocks:
   configuration: {}
   downstream_blocks:
   - crash_to_gcs
+  - crash_to_bq
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -15,6 +16,22 @@ blocks:
   type: data_loader
   upstream_blocks: []
   uuid: download_crash
+- all_upstream_blocks_executed: false
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: crash_to_bq
+  retry_config: null
+  status: updated
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - download_crash
+  uuid: crash_to_bq
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
@@ -52,6 +69,7 @@ blocks:
   configuration: {}
   downstream_blocks:
   - traffic_to_gcs
+  - traffic_to_bq
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -64,6 +82,22 @@ blocks:
   upstream_blocks:
   - download_traffic
   uuid: add_date_column
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: traffic_to_bq
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - add_date_column
+  uuid: traffic_to_bq
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
@@ -86,13 +120,13 @@ concurrency_config: {}
 conditionals: []
 created_at: '2024-04-08 01:16:50.743077+00:00'
 data_integration: null
-description: Download, Pre-process, Upload 1) Crash Data, and 2) Christchurch Traffic
-  Data
+description: 'Download, Pre-process, Upload 1) Crash Data, and 2) NZ Traffic Data
+  to: GCS and Big-Query'
 executor_config: {}
 executor_count: 1
 executor_type: null
 extensions: {}
-name: crash-traffic_data_to_gcs
+name: crash_traffic_data_to_GoogleCloud
 notification_config: {}
 remote_variables_dir: null
 retry_config: {}
@@ -102,6 +136,6 @@ settings:
 spark_config: {}
 tags: []
 type: python
-uuid: crash_traffic_data_to_gcs
+uuid: crash_traffic_data_to_googlecloud
 variables_dir: /home/src/mage_data/magic-zoomcamp
 widgets: []
