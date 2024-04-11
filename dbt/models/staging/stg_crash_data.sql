@@ -15,8 +15,9 @@ renamed as (
         advisoryspeed,
         areaunitid,
         bicycle,
+        case when cast(bicycle as int) > 0 then 1 else 0 end as has_bicycle,
         bridge,
-        bus,
+        cast(bus as int) as bus,
         carstationwagon,
         cliffbank,
         crashdirectiondescription,
@@ -30,7 +31,7 @@ renamed as (
         debris,
         directionroledescription,
         ditch,
-        fatalcount,
+        cast(fatalcount as int) as fatalcount,
         fence,
         flathill,
         guardrail,
@@ -91,6 +92,6 @@ select * from renamed
 -- dbt build --select <model_name> --vars '{'is_test_run': 'false'}'
 {% if var('is_test_run', default=true) %}
 
-  limit 100
+  limit 1000
 
 {% endif %}
