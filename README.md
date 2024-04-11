@@ -12,7 +12,8 @@ For my data engineering course project, I wanted to combine two data sets:
 
 Further downstream of this data engineering project, I would like to create a daily-updated map similar to [one made by Road Safety Risk](https://roadsafetyrisk.co.nz/maps/heat-maps#Canterbury) (not updated since 2016), and highlight dangerous sections of **Christchurch** specifically by crashes per unit traffic. It will be fun to compare my results to the one made above.
 
-![image](https://github.com/kanewilliams/christchurch-crash-data/assets/5062932/8bfb5a3c-7c30-49c4-9fad-0701f8e9ab7c)
+[![image](https://github.com/kanewilliams/christchurch-crash-data/assets/5062932/8bfb5a3c-7c30-49c4-9fad-0701f8e9ab7c)](https://lookerstudio.google.com/reporting/d0fc71e5-f3b3-426c-baff-7eb13c9f22c5)
+*Note: Click image to view in Looker Studio*
 
 ***
 
@@ -65,9 +66,9 @@ Further downstream of this data engineering project, I would like to create a da
   
   ![image](https://github.com/kanewilliams/christchurch-crash-data/assets/5062932/8986c355-b14c-4023-bccf-878521748f74)
 
-## Dataset Description
+## Input Data Description
 
-  - Consists of two .csv files: `TMS_traffic_counts.csv` (~400MB) and `Crash_Analysis_System_(CAS)_data.csv` (219MB).
+  - Consists of two .csv files: `TMS_traffic_counts.csv` (406MB) and `Crash_Analysis_System_(CAS)_data.csv` (219MB).
 
 ## Output
 
