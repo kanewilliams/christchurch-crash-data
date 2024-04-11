@@ -1,20 +1,8 @@
 # Christchurch Crash and Traffic Data
-This is my capstone project of the 2024 Data Engineering Zoomcamp, consisting of New Zealand Crash Data joined with New Zealand Traffic Data, filtered to just Christchurch. 
+This is my 2024 Data Engineering Zoomcamp capstone project, consisting of New Zealand Crash Data joined with New Zealand Traffic Data.
 
-Tools used: **Docker, Terraform, Mage, dbt, Looker, Google Cloud Platform (BigQuery and GCS)**
-  - [Problem Statement](#problem-statement)
-  - [Project Overview](#project-overview)
-    - [Instructions](#instructions)
-    - [Visualisation](#visualisation)
-  - [Repository Structure](#repository-structure)
-    - TODO
-    - TODO
-    - TODO
-    - TODO
-  - [To-do](#to-do)
-  - [Contact](#contact)
+Tools used: **Docker, Terraform, Mage, dbt, Google Cloud Platform (BigQuery, GCS, and Looker)**
 
-***
 ## Problem Statement
 For my data engineering course project, I wanted to combine two data sets:
 
@@ -22,47 +10,79 @@ For my data engineering course project, I wanted to combine two data sets:
 
  2) [TMS (Traffic Management System) daily traffic counts](https://opendata-nzta.opendata.arcgis.com/datasets/9cb86b342f2d4f228067a7437a7f7313). Also by Waka Kotahi, this data set consists of *daily-updated traffic volumes from state highway count sites, by vehicle type.*
 
-Further downstream of this data engineering project, I would like to create a daily-updated map similar to [one made by Road Safety Risk](https://roadsafetyrisk.co.nz/maps/heat-maps#Canterbury) (no longer updated), and highlight dangerous sections of Christchurch by crashes per unit traffic. It will be fun to compare my results to the one made above.
+Further downstream of this data engineering project, I would like to create a daily-updated map similar to [one made by Road Safety Risk](https://roadsafetyrisk.co.nz/maps/heat-maps#Canterbury) (not updated since 2016), and highlight dangerous sections of **Christchurch** specifically by crashes per unit traffic. It will be fun to compare my results to the one made above.
+
+![image](https://github.com/kanewilliams/christchurch-crash-data/assets/5062932/8bfb5a3c-7c30-49c4-9fad-0701f8e9ab7c)
 
 ***
+
+  - [Problem Statement](#problem-statement)
+  - [Project Overview](#project-overview)
+    - [Prerequisites](#prerequisites)
+    - [Instructions](#instructions)
+  - [Repository Structure](#repository-structure)
+    - [Docker Code](#docker-code)
+    - [Terraform Code](#terraform-code)
+    - [Mage Code](#mage-code)
+    - [dbt Code](#dbt-code)
+  - [To-do](#to-do)
+  - [Contact](#contact)
 
 ## Project Overview
 
  - (insert image)
 
+### Prerequisites
+- Install [Docker](TODO).
+- [Download `TMS_traffic_counts.csv`](TODO). Move to `christchurch-crash-data/TMS_traffic_counts.csv`.
+- Terraform by **TODO**
+
 ### Instructions
+1) Run `docker-compose up` to start Mage.
+2) Connect to Mage with `localhost:6789`. Run the pipeline `crash_traffic_data_to_googlecloud`.
 
-  - TODO
-
-### Visualisation  
 ***
 
 ## Repository Structure
 
 - ### Docker Code
-    TODO
+  - `docker-compose.yml`
+  - `Dockerfile`
 
-- ### Terraform (Infrastructure as) Code
+- ### Terraform Code
     TODO
 
 - ### Mage Code
-    TODO
-  
-- ### DBT Code
-    TODO
+  All pipelines to move the data from the web/locally to GCS are contained in:
+    - `/magic-zoomcamp`, and
+    - `/mage_data`
+ 
+  ![image](https://github.com/kanewilliams/christchurch-crash-data/assets/5062932/94be8ea9-9749-4c5d-bc7c-497adda90ecd)
 
-## Initial Dataset Description
+- ### DBT Code
+  All transformation code is contained in:
+  - `/dbt`
+  
+  ![image](https://github.com/kanewilliams/christchurch-crash-data/assets/5062932/8986c355-b14c-4023-bccf-878521748f74)
+
+## Dataset Description
 
   - Consists of two .csv files: `TMS_traffic_counts.csv` (~400MB) and `Crash_Analysis_System_(CAS)_data.csv` (219MB).
 
-## Final Dataset Description
+## Output
 
--  Is a table in google cloud storage and a dataset in big query.
+The **raw data** is uploaded to two locations:
+1) *Google Cloud Storage*, Partitioned by Year. This is to save on compute in case we wish to investigate the raw data with SQL queries such as: `Find number of fatal bicycle crashes in 2016`.
+2) *Big Query*, for ELT processing with dbt.
+
+The **processed data** is uploaded as `fact_crashes.sql` in Big Query.
+-  It is a table with the columns `year`, `has_bicycle`, `fatal`, and `total_traffic_counts`.
 
 ## TO-DO:
 
-- [ ] [Christchurch's Traffic Count Data](https://drive.google.com/drive/folders/1dJXE9XieHTazo1JUo67h8M0rPMYl7gZe). This is a collection of spreadsheets created [by the Christchurch City Council](https://ccc.govt.nz/transport/improving-our-transport-and-roads/traffic-count-data), which contains traffic count data for several key intersections in Christchurch. While NZ crash data has [already been combined and and mapped with traffic data by roadsafetyrisk.co.nz](https://roadsafetyrisk.co.nz/maps/heat-maps#Canterbury), it does not include local road data (from the council).
-  - [ ] Somehow merge this new dataset with the old one. 
+- [ ] Integrate [Christchurch's Traffic Count Data](https://drive.google.com/drive/folders/1dJXE9XieHTazo1JUo67h8M0rPMYl7gZe). This is a collection of spreadsheets created [by the Christchurch City Council](https://ccc.govt.nz/transport/improving-our-transport-and-roads/traffic-count-data), which contains traffic count data for several key intersections in Christchurch. While NZ crash data has [already](https://roadsafetyrisk.co.nz/maps/heat-maps#Canterbury) been combined and and mapped with traffic data by roadsafetyrisk.co.nz, it does not include local road data (from the council).
+  - [ ] Somehow merge this city-wide dataset with the state-wide data.
+  - [ ] Filter to just Christchurch
 - [ ] Add Testing and CI/CD
 - [ ] Use Terraform for IaC
 - [ ] Automatically pull data, with daily updates.
