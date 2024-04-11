@@ -9,7 +9,13 @@ with traffic_data as (
     from {{ ref('stg_traffic_data') }}
 )
 
-select Date, classweight, sum(trafficcount)
+select Date as year, sum(trafficcount) as total_traffic_count
 from traffic_data
-group by Date, classweight
-order by Date, classweight
+group by year
+order by year
+
+-- classweight TBD
+-- select Date, classweight, sum(trafficcount) as total_traffic_count
+-- from traffic_data
+-- group by Date, classweight
+-- order by Date, classweight

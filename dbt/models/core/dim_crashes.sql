@@ -9,7 +9,13 @@ with crash_data as (
     from {{ ref('stg_crash_data') }}
 )
 
-select crashYear as year, has_bicycle, sum(fatalCount) as fatal
+select crashYear as year, sum(fatalCount) as fatal
 from crash_data
-group by crashYear, has_bicycle
-order by crashYear, has_bicycle
+group by crashYear
+order by crashYear
+
+-- HAS_BICYCLE TBD
+-- select crashYear as year, has_bicycle, sum(fatalCount) as fatal
+-- from crash_data
+-- group by crashYear, has_bicycle
+-- order by crashYear, has_bicycle
