@@ -1,7 +1,7 @@
 # Christchurch Crash and Traffic Data
 This is my capstone project of the 2024 Data Engineering Zoomcamp, consisting of New Zealand Crash Data joined with New Zealand Traffic Data, filtered to just Christchurch. 
 
-Tools used: **Docker, Terraform, Mage, dbt, Looker**
+Tools used: **Docker, Terraform, Mage, dbt, Looker, Google Cloud Platform (BigQuery and GCS)**
   - [Problem Statement](#problem-statement)
   - [Project Overview](#project-overview)
     - [Instructions](#instructions)
