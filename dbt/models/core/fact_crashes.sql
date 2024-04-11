@@ -14,8 +14,8 @@ traffic as (
 )
 
 
-select crashes.year as year, crashes.fatal, traffic.total_traffic_count
+select crashes.year as year, crashes.has_bicycle, crashes.fatal, traffic.total_traffic_count
 from crashes 
 left join traffic 
 on crashes.year = traffic.year
-order by year
+order by year, has_bicycle
