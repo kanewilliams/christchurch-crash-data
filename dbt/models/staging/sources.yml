@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: staging
+    database: christchurch-crash-data
+    schema: raw_traffic_data
+
+    tables:
+      - name: crash_data
+      - name: traffic_data
