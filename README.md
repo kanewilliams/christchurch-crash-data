@@ -1,5 +1,5 @@
 # Christchurch Crash and Traffic Data
-This is my 2024 Data Engineering Zoomcamp capstone project, consisting of New Zealand Crash Data joined with New Zealand Traffic Data.
+This is my 2024 Data Engineering [Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp) capstone project, consisting of New Zealand Crash Data joined with New Zealand Traffic Data.
 
 Tools used: **Docker, Terraform, Mage, dbt, Google Cloud Platform (BigQuery, GCS, and Looker)**
 
@@ -60,7 +60,7 @@ Further downstream of this data engineering project, I would like to create a da
   ![image](https://github.com/kanewilliams/christchurch-crash-data/assets/5062932/94be8ea9-9749-4c5d-bc7c-497adda90ecd)
 
 - ### DBT Code
-  All transformation code is contained in:
+  All ELT transformation code is contained in:
   - `/dbt`
   
   ![image](https://github.com/kanewilliams/christchurch-crash-data/assets/5062932/8986c355-b14c-4023-bccf-878521748f74)
@@ -86,7 +86,8 @@ The **processed data** is uploaded as `fact_crashes.sql` in Big Query.
 - [ ] Add Testing and CI/CD
 - [ ] Use Terraform for IaC
 - [ ] Automatically pull data, with daily updates.
-- [ ] Create a web-interface to browse, with a heatmap.
+- [ ] Create a web-interface to browse the data.
+  - [ ] Visualize crash risk *per unit traffic*. 
 
 ## Contact
 
