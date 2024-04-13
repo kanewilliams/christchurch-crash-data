@@ -10,7 +10,7 @@ For my data engineering course project, I wanted to combine two data sets:
 
  2) [TMS (Traffic Management System) daily traffic counts](https://opendata-nzta.opendata.arcgis.com/datasets/9cb86b342f2d4f228067a7437a7f7313). Also by Waka Kotahi, this data set consists of *daily-updated traffic volumes from state highway count sites, by vehicle type.*
 
-Further downstream of this data engineering project, I would like to create a daily-updated map similar to [one made by Road Safety Risk](https://roadsafetyrisk.co.nz/maps/heat-maps#Canterbury) (not updated since 2016), and highlight dangerous sections of **Christchurch** specifically by crashes per unit traffic. It will be fun to compare my results to the one made above.
+Combining these two datasets is the first step. Further downstream of this data engineering project, I would like to create a daily-updated map similar to [one made by Road Safety Risk](https://roadsafetyrisk.co.nz/maps/heat-maps#Canterbury) (not updated since 2016), and highlight dangerous sections of **Christchurch** specifically by crashes per unit traffic. See [To-do](#to-do) below for more details.
 
 [![image](https://github.com/kanewilliams/christchurch-crash-data/assets/5062932/8bfb5a3c-7c30-49c4-9fad-0701f8e9ab7c)](https://lookerstudio.google.com/reporting/d0fc71e5-f3b3-426c-baff-7eb13c9f22c5)
 *Note: Click image to view in Looker Studio*
@@ -31,14 +31,21 @@ Further downstream of this data engineering project, I would like to create a da
 
 ## Project Overview
 
- - (insert image)
+![image](https://github.com/kanewilliams/christchurch-crash-data/assets/5062932/88a01811-ee2c-4804-bc49-823147c0005b)
 
 ### Prerequisites
-- Install [Docker](TODO).
-- [Download `TMS_traffic_counts.csv`](TODO). Move to `christchurch-crash-data/TMS_traffic_counts.csv`.
-- Terraform by **TODO**
+- Install [Docker](https://www.docker.com/products/docker-desktop/).
+- Install [Terraform](https://developer.hashicorp.com/terraform/install).
+- Create a [Google Cloud](https://cloud.google.com/?hl=en) project.
+- Create a [Service Key](https://cloud.google.com/iam/docs/keys-create-delete) `christchurch_service_account.json` for that project, with permissions:
+  - `BigQuery Admin`,
+  - `Storage Admin`, and
+  - `Compute Admin`.
+- Move it to `christchurch-crash-data/[SERVICE_KEY]`.
+- [Download `TMS_traffic_counts.csv`](https://opendata-nzta.opendata.arcgis.com/datasets/9cb86b342f2d4f228067a7437a7f7313). Move to `christchurch-crash-data/[CSV]`.
 
 ### Instructions
+1) Run `terraform init` on **[TODO]**
 1) Run `docker-compose up` to start Mage.
 2) Connect to Mage with `localhost:6789`. Run the pipeline `crash_traffic_data_to_googlecloud`.
 
@@ -81,14 +88,16 @@ The **processed data** is uploaded as `fact_crashes.sql` in Big Query.
 
 ## TO-DO:
 
+- [x] Use Terraform for IaC
+  - [ ] Automate Terraform installation with Docker 
 - [ ] Integrate [Christchurch's Traffic Count Data](https://drive.google.com/drive/folders/1dJXE9XieHTazo1JUo67h8M0rPMYl7gZe). This is a collection of spreadsheets created [by the Christchurch City Council](https://ccc.govt.nz/transport/improving-our-transport-and-roads/traffic-count-data), which contains traffic count data for several key intersections in Christchurch. While NZ crash data has [already](https://roadsafetyrisk.co.nz/maps/heat-maps#Canterbury) been combined and and mapped with traffic data by roadsafetyrisk.co.nz, it does not include local road data (from the council).
   - [ ] Somehow merge this city-wide dataset with the state-wide data.
   - [ ] Filter to just Christchurch
 - [ ] Add Testing and CI/CD
-- [ ] Use Terraform for IaC
 - [ ] Automatically pull data, with daily updates.
 - [ ] Create a web-interface to browse the data.
-  - [ ] Visualize crash risk *per unit traffic*. 
+  - [ ] Visualize crash risk *per unit traffic*.
+- [ ] Use Mage to orchestrate dbt
 
 ## Contact
 
