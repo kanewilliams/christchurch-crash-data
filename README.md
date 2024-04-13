@@ -31,7 +31,7 @@ Combining these two datasets is the first step. Further downstream of this data 
 
 ## Project Overview
 
- - (insert image)
+![image](https://github.com/kanewilliams/christchurch-crash-data/assets/5062932/88a01811-ee2c-4804-bc49-823147c0005b)
 
 ### Prerequisites
 - Install [Docker](https://www.docker.com/products/docker-desktop/).
@@ -89,13 +89,15 @@ The **processed data** is uploaded as `fact_crashes.sql` in Big Query.
 ## TO-DO:
 
 - [x] Use Terraform for IaC
+  - [ ] Automate Terraform installation with Docker 
 - [ ] Integrate [Christchurch's Traffic Count Data](https://drive.google.com/drive/folders/1dJXE9XieHTazo1JUo67h8M0rPMYl7gZe). This is a collection of spreadsheets created [by the Christchurch City Council](https://ccc.govt.nz/transport/improving-our-transport-and-roads/traffic-count-data), which contains traffic count data for several key intersections in Christchurch. While NZ crash data has [already](https://roadsafetyrisk.co.nz/maps/heat-maps#Canterbury) been combined and and mapped with traffic data by roadsafetyrisk.co.nz, it does not include local road data (from the council).
   - [ ] Somehow merge this city-wide dataset with the state-wide data.
   - [ ] Filter to just Christchurch
 - [ ] Add Testing and CI/CD
 - [ ] Automatically pull data, with daily updates.
 - [ ] Create a web-interface to browse the data.
-  - [ ] Visualize crash risk *per unit traffic*. 
+  - [ ] Visualize crash risk *per unit traffic*.
+- [ ] Use Mage to orchestrate dbt
 
 ## Contact
 
