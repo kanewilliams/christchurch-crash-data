@@ -45,10 +45,27 @@ Combining these two datasets is the first step. Further downstream of this data 
 - [Download `TMS_traffic_counts.csv`](https://opendata-nzta.opendata.arcgis.com/datasets/9cb86b342f2d4f228067a7437a7f7313). Move to `christchurch-crash-data/[CSV]`.
 
 ### Instructions
-1) Run `terraform init` on **[TODO]**
-1) Run `docker-compose up` to start Mage.
-2) Connect to Mage with `localhost:6789`. Run the pipeline `crash_traffic_data_to_googlecloud`.
+#### Provision Cloud Services with Terraform
+1) cd `/terraform` and run `terraform init`
+2) Open `terraform/variables.tf` and edit:
+  - The default bucket name: `traffic-data-your-id` with a unique ID.
+  - The project ID with your google cloud project ID.
+#### Ingest Data with Mage
+3) Run `docker-compose up` on home folder to start Mage.
+4) Connect to Mage with `localhost:6789` in browser.
+5) Edit `project_id` in each yellow "data exporter" block to your google cloud project ID. There are 4 yellow blocks.
+6) Edit `bucket_name` in the `crash_to_gcs` and `traffic_to_gcs` blocks to the unique ID you gave in instruction (2) above.
+7) Run the pipeline `crash_traffic_data_to_googlecloud`.
 
+You should now have all the data uploaded to both bigquery and google cloud storage.
+#### Process Data with dbt
+8) Connect [dbt cloud](https://www.getdbt.com/product/dbt-cloud) with BigQuery. ([Instructions](https://docs.getdbt.com/docs/cloud/connect-data-platform/connect-bigquery))
+9) Run the dbt pipeline.
+
+Upon success, you should have a `fact_crashes.sql` in your dbt folder.
+
+#### Destroy Cloud Services
+10) Once finished, run `terraform destroy` to remove infrastructure.
 ***
 
 ## Repository Structure
