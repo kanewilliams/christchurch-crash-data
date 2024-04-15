@@ -31,13 +31,13 @@ Combining these two datasets is the first step. Further downstream of this data 
 
 ## Project Overview
 
-![image](https://github.com/kanewilliams/christchurch-crash-data/assets/5062932/88a01811-ee2c-4804-bc49-823147c0005b)
+![image](misc/overview.png)
 
 ### Prerequisites
 - Install [Docker](https://www.docker.com/products/docker-desktop/).
 - Install [Terraform](https://developer.hashicorp.com/terraform/install).
 - Create a [Google Cloud](https://cloud.google.com/?hl=en) project.
-- Create a [Service Key](https://cloud.google.com/iam/docs/keys-create-delete) `christchurch_service_account.json` for that project, with permissions:
+- Create a [Service Key](https://cloud.google.com/iam/docs/keys-create-delete) renaming it `christchurch_service_account.json`, with permissions:
   - `BigQuery Admin`,
   - `Storage Admin`, and
   - `Compute Admin`.
@@ -48,24 +48,23 @@ Combining these two datasets is the first step. Further downstream of this data 
 #### Provision Cloud Services with Terraform
 1) cd `/terraform` and run `terraform init`
 2) Open `terraform/variables.tf` and edit:
-  - The default bucket name: `traffic-data-your-id` with a unique ID.
-  - The project ID with your google cloud project ID.
-#### Ingest Data with Mage
-3) Run `docker-compose up` on home folder to start Mage.
-4) Connect to Mage with `localhost:6789` in browser.
-5) Edit `project_id` in each yellow "data exporter" block to your google cloud project ID. There are 4 yellow blocks.
-6) Edit `bucket_name` in the `crash_to_gcs` and `traffic_to_gcs` blocks to the unique ID you gave in instruction (2) above.
-7) Run the pipeline `crash_traffic_data_to_googlecloud`.
+   - The default bucket name: `traffic-data-your-id` with a unique ID.
+   - The project ID with your google cloud project ID.
+3) Run `terraform apply`
 
-You should now have all the data uploaded to both bigquery and google cloud storage.
+#### Ingest Data with Mage
+4) Run `docker-compose up` on `/christchurch-crash-data` to start Mage.
+5) Connect to Mage with `localhost:6789` in browser.
+6) Edit `project_id` in each yellow "data exporter" block to your google cloud project ID. There are 4 yellow blocks.
+7) Edit `bucket_name` in the `crash_to_gcs` and `traffic_to_gcs` blocks to the bucket ID you choose in (2) above.
+8) Run pipeline `crash_traffic_data_to_googlecloud` with `start_crash_pipeline` trigger. ~ 10 min.
+
 #### Process Data with dbt
 8) Connect [dbt cloud](https://www.getdbt.com/product/dbt-cloud) with BigQuery. ([Instructions](https://docs.getdbt.com/docs/cloud/connect-data-platform/connect-bigquery))
-9) Run the dbt pipeline.
-
-Upon success, you should have a `fact_crashes.sql` in your dbt folder.
+9) Run the dbt pipeline. Upon success, you should have a `fact_crashes.sql` in your dbt folder.
 
 #### Destroy Cloud Services
-10) Once finished, run `terraform destroy` to remove infrastructure.
+10) Once finished with the project, run `terraform destroy` to decomission your cloud infrastructure, saving cost.
 ***
 
 ## Repository Structure
@@ -75,10 +74,11 @@ Upon success, you should have a `fact_crashes.sql` in your dbt folder.
   - `Dockerfile`
 
 - ### Terraform Code
-    TODO
+  All infrastructure as code (IaC) is contained in:
+    - `/terraform`
 
 - ### Mage Code
-  All pipelines to move the data from the web/locally to GCS are contained in:
+  All pipelines to move the data from the web/locally to GCP are contained in:
     - `/magic-zoomcamp`, and
     - `/mage_data`
  
@@ -87,6 +87,7 @@ Upon success, you should have a `fact_crashes.sql` in your dbt folder.
 - ### DBT Code
   All ELT transformation code is contained in:
   - `/dbt`
+  - `dbt_project.yml`
   
   ![image](https://github.com/kanewilliams/christchurch-crash-data/assets/5062932/8986c355-b14c-4023-bccf-878521748f74)
 
