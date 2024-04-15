@@ -1,0 +1,1 @@
+{"startDate": "str", "siteID": "int64", "regionName": "str", "siteReference": "str", "classWeight": "str", "siteDescription": "str", "laneNumber": "int64", "flowDirection": "int64", "trafficCount": "float64"}

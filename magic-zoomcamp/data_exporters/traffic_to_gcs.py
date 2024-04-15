@@ -6,8 +6,9 @@ if 'data_exporter' not in globals():
     from mage_ai.data_preparation.decorators import data_exporter
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/home/src/crash_service_account.json'
-bucket_name = 'traffic-data-christchurch'
-project_id = 'christchurch-crash-data'
+
+project_id = 'YOUR-PROJECT-ID'
+bucket_name = 'traffic-data-your-id'
 
 table_name = "traffic_data"
 

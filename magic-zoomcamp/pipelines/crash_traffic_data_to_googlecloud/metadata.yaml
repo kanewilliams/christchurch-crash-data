@@ -92,7 +92,7 @@ blocks:
   language: python
   name: traffic_to_bq
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: data_exporter
   upstream_blocks:
@@ -108,7 +108,7 @@ blocks:
   language: python
   name: traffic_to_gcs
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: data_exporter
   upstream_blocks:

@@ -17,7 +17,8 @@ def export_data_to_big_query(df: DataFrame, **kwargs) -> None:
     Docs: https://docs.mage.ai/design/data-loading#bigquery
     """
 
-    project_id = 'christchurch-crash-data'
+    project_id = 'YOUR-PROJECT-ID'
+    
     dataset_name = 'raw_traffic_data'
     table_name = 'crash_data'
 

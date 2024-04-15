@@ -13,7 +13,7 @@ variable "project" {
 
 variable "gcs_bucket_name" {
   description = "My Storage Bucket Name"
-  #UPDATE to a unique bucket name below.
+  #UPDATE to a unique bucket name below. (NOTE: must be lower-case)
   default     = "traffic-data-your-id"
 }
 
