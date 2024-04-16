@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: staging
-    database: christchurch-crash-data
+    database: YOUR_PROJECT_NAME
     schema: raw_traffic_data
 
     tables:
