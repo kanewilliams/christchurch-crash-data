@@ -46,7 +46,7 @@ Combining these two datasets is the first step. Further downstream, I would like
 
 ### Instructions
 
-See [Instructions.md](instructions.md).
+See [INSTRUCTIONS.md](INSTRUCTIONS.md).
 
 ***
 

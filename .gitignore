@@ -8,3 +8,4 @@ Lnk_DB.csv
 crash_service_account2.json
 terraform/.terraform/providers/registry.terraform.io/hashicorp/google/5.6.0/windows_386/terraform-provider-google_v5.6.0_x5.exe
 terraform/terraform.exe
+terraform/terraform.tfstate.backup
