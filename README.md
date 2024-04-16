@@ -10,7 +10,7 @@ For my data engineering course project, I wanted to combine two data sets:
 
  2) [TMS (Traffic Management System) daily traffic counts](https://opendata-nzta.opendata.arcgis.com/datasets/9cb86b342f2d4f228067a7437a7f7313). Also by Waka Kotahi, this data set consists of *daily-updated traffic volumes from state highway count sites, by vehicle type.*
 
-Combining these two datasets is the first step. Further downstream of this data engineering project, I would like to create a daily-updated map similar to [one made by Road Safety Risk](https://roadsafetyrisk.co.nz/maps/heat-maps#Canterbury) (not updated since 2016), and highlight dangerous sections of **Christchurch** specifically by crashes per unit traffic. See [To-do](#to-do) below for more details.
+Combining these two datasets is the first step. Further downstream, I would like to create a daily-updated map similar to [one made by Road Safety Risk](https://roadsafetyrisk.co.nz/maps/heat-maps#Canterbury) (not updated since 2016), and highlight dangerous sections of **Christchurch** specifically by crashes per unit traffic. See [To-do](#to-do) below for more details.
 
 [![image](https://github.com/kanewilliams/christchurch-crash-data/assets/5062932/8bfb5a3c-7c30-49c4-9fad-0701f8e9ab7c)](https://lookerstudio.google.com/reporting/d0fc71e5-f3b3-426c-baff-7eb13c9f22c5)
 *Note: Click image to view in Looker Studio*
@@ -45,26 +45,9 @@ Combining these two datasets is the first step. Further downstream of this data 
 - [Download `TMS_traffic_counts.csv`](https://opendata-nzta.opendata.arcgis.com/datasets/9cb86b342f2d4f228067a7437a7f7313). Move to `christchurch-crash-data/[CSV]`.
 
 ### Instructions
-#### Provision Cloud Services with Terraform
-1) cd `/terraform` and run `terraform init`
-2) Open `terraform/variables.tf` and edit:
-   - The default bucket name: `traffic-data-your-id` with a unique ID.
-   - The project ID with your google cloud project ID.
-3) Run `terraform apply`
 
-#### Ingest Data with Mage
-4) Run `docker-compose up` on `/christchurch-crash-data` to start Mage.
-5) Connect to Mage with `localhost:6789` in browser.
-6) Edit `project_id` in each yellow "data exporter" block to your google cloud project ID. There are 4 yellow blocks.
-7) Edit `bucket_name` in the `crash_to_gcs` and `traffic_to_gcs` blocks to the bucket ID you choose in (2) above.
-8) Run pipeline `crash_traffic_data_to_googlecloud` with `start_crash_pipeline` trigger. ~ 10 min.
+See [Instructions.md](instructions.md).
 
-#### Process Data with dbt
-8) Connect [dbt cloud](https://www.getdbt.com/product/dbt-cloud) with BigQuery. ([Instructions](https://docs.getdbt.com/docs/cloud/connect-data-platform/connect-bigquery))
-9) Run the dbt pipeline. Upon success, you should have a `fact_crashes.sql` in your dbt folder.
-
-#### Destroy Cloud Services
-10) Once finished with the project, run `terraform destroy` to decomission your cloud infrastructure, saving cost.
 ***
 
 ## Repository Structure
