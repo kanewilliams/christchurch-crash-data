@@ -34,6 +34,7 @@ Combining these two datasets is the first step. Further downstream, I would like
 ![image](misc/overview.png)
 
 ### Prerequisites
+- Clone this project.
 - Install [Docker](https://www.docker.com/products/docker-desktop/).
 - Install [Terraform](https://developer.hashicorp.com/terraform/install).
 - Create a [Google Cloud](https://cloud.google.com/?hl=en) project.
@@ -46,7 +47,7 @@ Combining these two datasets is the first step. Further downstream, I would like
 
 ### Instructions
 
-See [INSTRUCTIONS.md](INSTRUCTIONS.md).
+See [INSTRUCTIONS.md](misc/INSTRUCTIONS.md).
 
 ***
 
