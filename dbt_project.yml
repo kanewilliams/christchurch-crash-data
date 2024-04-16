@@ -37,6 +37,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
   chch_crash_data:
+    #schema: dbt_traffic_data 
     # Applies to all files under models/example/
     #example:
     #  +materialized: table
