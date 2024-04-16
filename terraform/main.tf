@@ -32,9 +32,11 @@ resource "google_storage_bucket" "raw_bucket" {
 resource "google_bigquery_dataset" "raw_dataset" {
   dataset_id = var.bq_dataset_name
   location   = var.location
+  delete_contents_on_destroy = true
 }
 
 resource "google_bigquery_dataset" "dbt_dataset" {
   dataset_id = var.bq_dbt_dataset_name
   location   = var.location
+  delete_contents_on_destroy = true # Does not work? To fix.
 }
